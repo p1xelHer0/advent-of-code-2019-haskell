@@ -1,0 +1,39 @@
+name: aoc2019
+version: 0.1.0.0
+github: "p1xelHer0/advent-of-code-2019-haskell"
+license: MIT
+author: "Pontus Nagy"
+copyright: "2019 Pontus Nagy"
+
+extra-source-files:
+  - README.md
+
+description: Advent of Code 2019
+
+dependencies:
+  - base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+
+executables:
+  aoc2019-exe:
+    main: Main.hs
+    source-dirs: app
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - aoc2019
+
+tests:
+  aoc2019-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - aoc2019
