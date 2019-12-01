@@ -1,11 +1,37 @@
-# Advent of Code 2019
+# ✨ Advent of Code 2019 ✨
 
-My solutions to [Advent of Code 2019](https://adventofcode.com/) written in Haskell
+### My solutions to [Advent of Code 2019](https://adventofcode.com/) written in Haskell
 
-I use [Stack](https://haskellstack.org/) to run the puzzles. Inside the `src` folder you will find `Day/Part.hs`. For example, running Day 1 Part 1:
+I use [Stack](https://haskellstack.org/) to run the puzzles. In `./src` you will find each puzzle.
 
-```bash
-cd src/1
-stack 1.hs
-Result
+### Running puzzles
+
+Puzzles are numbered `{1..25}{ab}`
+
+To run all puzzles:
+
 ```
+stack run
+```
+
+#### Running a single puzzle:
+
+```
+./run solve 1a
+```
+
+Benchmark the puzzle:
+
+```
+./run bench 1a
+```
+
+Test the puzzle:
+
+```
+./run test 1a
+```
+
+### Thanks
+
+Bootstrap of project shamelessly stolen from [meck's Advent of Code](https://github.com/meck/AoC2019/), thanks meck!
