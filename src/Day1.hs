@@ -4,23 +4,23 @@ module Day1
   )
 where
 
-fuelRequired :: Int -> Int
-fuelRequired n = floor (fromIntegral n / 3) - 2
+input :: String -> [Int]
+input = fmap read . lines
 
-fuelSum :: [Int] -> Int
-fuelSum = sum . fmap fuelRequired
+fuel :: Int -> Int
+fuel mass = mass `div` 3 - 2
+
+totalFuel :: [Int] -> Int
+totalFuel = foldr ((+) . fuel) 0
 
 day01a :: String -> String
-day01a = show . fuelSum . fmap read . lines
+day01a = show . totalFuel . input
 
-fuelRequired' :: Int -> Int -> Int
-fuelRequired' result x = if nextFuel > 0
-  then fuelRequired' (result + nextFuel) nextFuel
-  else result
-  where nextFuel = fuelRequired x
+fuel' :: Int -> Int
+fuel' = sum . tail . takeWhile (> 0) . iterate fuel
 
-fuelSum' :: [Int] -> Int
-fuelSum' = sum . map (fuelRequired' 0)
+totalFuel' :: [Int] -> Int
+totalFuel' = foldr ((+) . fuel') 0
 
 day01b :: String -> String
-day01b = show . fuelSum' . fmap read . lines
+day01b = show . totalFuel' . input

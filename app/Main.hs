@@ -15,7 +15,7 @@ main = do
     else
       let n = head args
       in  case lookup n argLookup of
-            Nothing -> die $ n ++ " is not a valid exercise"
+            Nothing -> die $ n ++ " is not a valid puzzle"
             Just p  -> solvePart (n, p)
 
 
