@@ -4,6 +4,10 @@
 
 I use [Stack](https://haskellstack.org/) to run the puzzles. In `./src` you will find each puzzle.
 
+The [master](https://github.com/p1xelHer0/advent-of-code-2019-haskell/) branch contains my polished solutions ✨
+
+The [original](https://github.com/p1xelHer0/advent-of-code-2019-haskell/tree/original/) branch contains my unfiltered, original solutions 😱
+
 ### Running puzzles
 
 Puzzles are numbered `{1..25}{ab}`
