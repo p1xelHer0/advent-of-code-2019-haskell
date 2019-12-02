@@ -5,12 +5,16 @@ module Day2
 where
 
 import           Data.List.Split
+import           Data.List
 import qualified Data.IntMap.Strict            as IM
 import           Data.Maybe                    as Mb
 
 type Position = Int
 type Program = IM.IntMap Int
 type Operation = Int -> Int -> Int
+
+type Noun = Int
+type Verb = Int
 
 input :: String -> [Int]
 input = fmap read . endBy ","
@@ -28,11 +32,11 @@ opcode x = case x of
   99 -> Halt
   _  -> Error
 
-run :: Program -> Maybe Program
-run = run' 0 where
-  run' instr prog = case opcode (valueFromPos instr prog) of
-    Add   -> run' (instr + 4) $ operate instr (+) prog
-    Mult  -> run' (instr + 4) $ operate instr (*) prog
+run1 :: Program -> Maybe Program
+run1 = run1' 0 where
+  run1' instr prog = case opcode (valueFromPos instr prog) of
+    Add   -> run1' (instr + 4) $ operate instr (+) prog
+    Mult  -> run1' (instr + 4) $ operate instr (*) prog
     Halt  -> Just prog
     Error -> Nothing
 
@@ -52,9 +56,32 @@ getInstructions instr prog = (x', y', pos)
   y'  = valueFromPos y prog
   pos = valueFromPos (instr + 3) prog
 
+extractResult :: Maybe Program -> Int
+extractResult prog = head $ fmap snd $ IM.toList $ fromJust prog
 
 day02a :: String -> String
-day02a s = show $ head $ fmap snd $ IM.toList $ fromJust $ run (mappedInput s)
+day02a s = show $ extractResult $ run1 (mappedInput s)
+
+outputToProduce = 19690720
+
+nouns :: [Noun]
+nouns = [0 .. 99]
+
+verbs :: [Verb]
+verbs = [0 .. 99]
+
+run2 :: Program -> [((Noun, Verb), Int)]
+run2 prog = catMaybes $ do
+  noun <- nouns
+  verb <- verbs
+  let test = IM.insert 2 verb $ IM.insert 1 noun prog
+  pure $ sequenceA ((noun, verb), Just (extractResult $ run1 test))
+
+findIt :: [((Noun, Verb), Int)] -> (Noun, Verb)
+findIt = fst . head . filter (\(_, result) -> result == outputToProduce)
+
+doIt s = findIt $ run2 (mappedInput s)
 
 day02b :: String -> String
-day02b = show . id . mappedInput
+day02b s = show $ 100 * fst nounAndVerb + snd nounAndVerb
+  where nounAndVerb = doIt s
