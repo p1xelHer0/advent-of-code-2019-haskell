@@ -1,5 +1,7 @@
 # ✨ Advent of Code 2019 ✨
 
+> 1AB 2A solved
+
 ## My solutions to [Advent of Code 2019](https://adventofcode.com/2019/) written in [Haskell](https://www.haskell.org/)
 
 I use [Stack](https://haskellstack.org/) to run the puzzles. In `./src` you will find each puzzle.
